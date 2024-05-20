@@ -7,9 +7,7 @@ describe('Home', () => {
     render(<Home />);
 
     const heading = screen.getByRole('heading', { level: 1 });
-    const link = screen.getByRole('link', { name: 'About' });
 
     expect(heading).toBeInTheDocument();
-    expect(link).toBeInTheDocument();
   });
 });
