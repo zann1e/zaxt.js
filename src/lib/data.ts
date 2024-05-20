@@ -1,4 +1,4 @@
-import { Post } from './types';
+import { Comment, Post } from './types';
 export async function getPosts(): Promise<Post[]> {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -24,8 +24,23 @@ export async function getPost(postId: number): Promise<Post> {
     const data = await response.json();
     return data as Post;
   } catch (error) {
-    // Handle error appropriately
     console.error(`Error fetching post with id ${postId}:`, error);
+    throw error;
+  }
+}
+
+export async function getComments(postId: number): Promise<Comment[]> {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
+    );
+    if (!response.ok) {
+      throw new Error('Failed to fetch comments');
+    }
+    const data = await response.json();
+    return data as Comment[];
+  } catch (error) {
+    console.error(`Error fetching comments for post with id ${postId}:`, error);
     throw error;
   }
 }
