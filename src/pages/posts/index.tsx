@@ -10,7 +10,7 @@ interface PostsProps {
 const PostsPage: React.FC<PostsProps> = ({ posts }) => {
   return (
     <div>
-      <h1>Posts</h1>
+      <h1>Posts with Pages Route</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
