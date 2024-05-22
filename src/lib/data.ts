@@ -68,3 +68,16 @@ export const getPhotos = async (albumId: number): Promise<Photo[]> => {
   const photos: Photo[] = await response.json();
   return photos;
 };
+
+export const getPhoto = async (photoId: number): Promise<Photo> => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/photos/${photoId}`,
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch photo');
+  }
+
+  const photo: Photo = await response.json();
+  return photo;
+};

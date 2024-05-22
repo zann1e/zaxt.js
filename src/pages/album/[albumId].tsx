@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 import { getAlbums, getPhotos } from '../../lib/data';
 import { Album, Photo } from '../../lib/types';
 
@@ -13,8 +15,15 @@ const AlbumPage: React.FC<AlbumPageProps> = ({ album, photos }) => (
     <ul className="photos">
       {photos.map((photo) => (
         <li key={photo.id}>
-          <img src={photo.thumbnailUrl} alt={photo.title} />
-          <p>{photo.title}</p>
+          <Link href={`/album/${album.id}/photo/${photo.id}`}>
+            <Image
+              src={photo.thumbnailUrl}
+              alt={photo.title}
+              width={150}
+              height={150}
+            />
+            {photo.title}
+          </Link>
         </li>
       ))}
     </ul>
