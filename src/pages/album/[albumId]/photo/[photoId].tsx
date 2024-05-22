@@ -47,6 +47,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
+  if (photo.albumId != Number(albumId)) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       photo,
