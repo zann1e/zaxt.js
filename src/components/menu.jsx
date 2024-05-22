@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Menu() {
   return (
-    <div className="menu">
-      <ul>
+    <div>
+      <ul className="menu">
         <li>
           <Link href="/">Home</Link>
         </li>
