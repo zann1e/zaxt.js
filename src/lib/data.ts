@@ -1,4 +1,4 @@
-import { Album, Comment, Post, Photo } from './types';
+import { Album, Comment, Post, Photo, User } from './types';
 export async function getPosts(): Promise<Post[]> {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -81,3 +81,40 @@ export const getPhoto = async (photoId: number): Promise<Photo> => {
   const photo: Photo = await response.json();
   return photo;
 };
+
+export async function getUsers(): Promise<User[]> {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch users');
+  }
+
+  const users: User[] = await response.json();
+  return users;
+}
+
+export async function getUser(userId: number): Promise<User> {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${userId}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch user with ID: ${userId}`);
+  }
+
+  const user: User = await response.json();
+  return user;
+}
+
+export async function getUserPosts(userId: number): Promise<Post[]> {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${userId}/posts`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts for user with ID: ${userId}`);
+  }
+
+  const posts: Post[] = await response.json();
+  return posts;
+}
