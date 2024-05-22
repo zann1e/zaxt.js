@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 import { getAlbums, getPhoto } from '../../../../lib/data';
 import { Photo, Album } from '../../../../lib/types';
 
@@ -11,6 +12,13 @@ interface PhotoPageProps {
 
 const PhotoPage: React.FC<PhotoPageProps> = ({ photo, album }) => (
   <div>
+    <Head>
+      <title>{photo.title}</title>
+      <meta
+        name="description"
+        content={`View the photo titled "${photo.title}" from the album ${album.title}.`}
+      />
+    </Head>
     <h1>{photo.title}</h1>
     <p>
       Back to{' '}
