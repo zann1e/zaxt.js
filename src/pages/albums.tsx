@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import { getAlbums } from '../lib/data';
 import { Album } from '../lib/types';
+import Link from 'next/link';
 
 interface AlbumsPageProps {
   albums: Album[];
@@ -11,7 +12,9 @@ const AlbumsPage: React.FC<AlbumsPageProps> = ({ albums }) => (
     <h1>Albums Page</h1>
     <ul className="albums">
       {albums.map((album) => (
-        <li key={album.id}>{album.title}</li>
+        <li key={album.id}>
+          <Link href={`/album/${album?.id}`}>{album?.title}</Link>
+        </li>
       ))}
     </ul>
   </div>

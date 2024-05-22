@@ -1,4 +1,4 @@
-import { Album, Comment, Post } from './types';
+import { Album, Comment, Post, Photo } from './types';
 export async function getPosts(): Promise<Post[]> {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -54,4 +54,17 @@ export const getAlbums = async (): Promise<Album[]> => {
 
   const albums: Album[] = await response.json();
   return albums;
+};
+
+export const getPhotos = async (albumId: number): Promise<Photo[]> => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`,
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch photos');
+  }
+
+  const photos: Photo[] = await response.json();
+  return photos;
 };
