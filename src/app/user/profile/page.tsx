@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { unsealData } from 'iron-session';
 import { getUser } from '../../../lib/data';
+import { SessionData } from '../../../lib/types';
 
 export default async function UserProfile() {
   const cookieStore = cookies();
@@ -11,7 +12,7 @@ export default async function UserProfile() {
     redirect('/user/login');
   }
 
-  const session = await unsealData(sessionCookie.value, {
+  const session: SessionData = await unsealData(sessionCookie.value, {
     password: process.env.IRON_SESSION_PASSWORD!,
   });
 

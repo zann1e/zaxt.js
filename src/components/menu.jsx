@@ -2,16 +2,16 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { unsealData } from 'iron-session';
 
-async function getSession() {
+function getSession() {
   const cookieStore = cookies();
   const sessionCookie = cookieStore.get('iron-session/');
 
   if (sessionCookie) {
     try {
-      const session = await unsealData(sessionCookie.value, {
+      const session = unsealData(sessionCookie.value, {
         password: process.env.IRON_SESSION_PASSWORD,
       });
-      return session.loggedIn ? true : false;
+      return session.loggedIn;
     } catch {
       return false;
     }
@@ -20,8 +20,8 @@ async function getSession() {
   return false;
 }
 
-export default async function Menu() {
-  const isLoggedIn = await getSession();
+export default function Menu() {
+  const isLoggedIn = getSession();
 
   return (
     <div>

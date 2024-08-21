@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   }
 
   const session = await unsealData(cookie.value, {
-    password: process.env.IRON_SESSION_PASSWORD,
+    password: process.env.IRON_SESSION_PASSWORD!,
   });
 
   return NextResponse.json(session);

@@ -50,3 +50,8 @@ export interface User {
     bs: string;
   };
 }
+
+export interface SessionData {
+  userId: number;
+  loggedIn: boolean;
+}

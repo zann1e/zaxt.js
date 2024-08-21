@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   const sessionData = { loggedIn: true, userId: user.id };
   const sealed = await sealData(sessionData, {
-    password: process.env.IRON_SESSION_PASSWORD,
+    password: process.env.IRON_SESSION_PASSWORD!,
   });
 
   const response = NextResponse.json({ message: 'Login successful', ok: true });
