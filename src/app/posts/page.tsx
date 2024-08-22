@@ -5,7 +5,7 @@ export default async function PostsPage() {
   const posts = await getPosts();
   return (
     <div>
-      <h1>Posts with Pages Route</h1>
+      <h1>Posts with App Route</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
