@@ -22,6 +22,7 @@ const UserLogin = () => {
     console.log(response);
     if (response.ok) {
       router.push('/user/profile');
+      router.refresh();
     } else {
       const data = await response.json();
       setError(data.error || 'Login failed');

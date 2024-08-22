@@ -55,3 +55,8 @@ export interface SessionData {
   userId: number;
   loggedIn: boolean;
 }
+
+export interface MenuItem {
+  href: string;
+  label: string;
+}
