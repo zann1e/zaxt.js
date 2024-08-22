@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { unsealData } from 'iron-session';
-import { getUser } from '../../../lib/data';
+import { getUser, getUserPosts } from '../../../lib/data';
 import { SessionData } from '../../../lib/types';
+import Link from 'next/link';
 
 export default async function UserProfile() {
   const cookieStore = cookies();
@@ -26,11 +27,21 @@ export default async function UserProfile() {
     redirect('/user/login');
   }
 
+  const posts = await getUserPosts(session.userId);
+
   return (
     <div>
       <h1>User Profile</h1>
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
+      <h1>Posts</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <Link href={`/post/${post.id}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
