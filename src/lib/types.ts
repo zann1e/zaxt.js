@@ -54,9 +54,16 @@ export interface User {
 export interface SessionData {
   userId: number;
   loggedIn: boolean;
+  darkMode: string;
 }
 
 export interface MenuItem {
   href: string;
   label: string;
+}
+
+export enum DarkModeSetting {
+  AUTOMATIC = 'automatic',
+  OFF = 'off',
+  ON = 'on',
 }

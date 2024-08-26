@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sealData } from 'iron-session';
 import { getUsers } from '../../../../lib/data';
+import { DarkModeSetting } from '../../../../lib/types';
 
 export async function POST(request: NextRequest) {
   const { email, password } = await request.json();
@@ -15,7 +16,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const sessionData = { loggedIn: true, userId: user.id };
+  const sessionData = {
+    loggedIn: true,
+    userId: user.id,
+    darkMode: DarkModeSetting.AUTOMATIC,
+  };
   const sealed = await sealData(sessionData, {
     password: process.env.IRON_SESSION_PASSWORD!,
   });

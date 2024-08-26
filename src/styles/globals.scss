@@ -101,11 +101,11 @@ a {
   }
 }
 
-html.dark-mode {
+.dark-mode {
   @include dark-mode();
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   html:not(.light-mode) {
     @include dark-mode();
   }

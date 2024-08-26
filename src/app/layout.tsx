@@ -1,16 +1,11 @@
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import Logo from '../components/logo';
-import React from 'react';
 import { cookies } from 'next/headers'; // Adjust import as necessary
 import { unsealData } from 'iron-session';
 import StaticMenu from '../components/StaticMenu';
-import { MenuItem, SessionData } from '../lib/types';
+import { DarkModeSetting, MenuItem, SessionData } from '../lib/types';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: ({
+const RootLayout: ({
   children,
 }: {
   children: any;
@@ -19,12 +14,24 @@ const Layout: ({
   const sessionCookie = cookieStore.get('iron-session/');
 
   let isLoggedIn = false;
+  let modeClass;
   if (sessionCookie) {
     try {
       const session: SessionData = await unsealData(sessionCookie.value, {
         password: process.env.IRON_SESSION_PASSWORD!,
       });
       isLoggedIn = session.loggedIn;
+      switch (session.darkMode) {
+        case DarkModeSetting.ON:
+          console.log('Dark mode ON');
+          modeClass = 'dark-mode';
+          break;
+        case DarkModeSetting.OFF:
+          console.log('Dark mode off');
+
+          modeClass = 'light-mode';
+          break;
+      }
     } catch {
       isLoggedIn = false;
     }
@@ -46,9 +53,9 @@ const Layout: ({
   ];
 
   return (
-    <html>
+    <html className={modeClass}>
       <body>
-        <Logo />
+        <Logo className={modeClass} />
         <StaticMenu menuItems={menuItems} />
         {children}
       </body>
@@ -56,4 +63,4 @@ const Layout: ({
   );
 };
 
-export default Layout;
+export default RootLayout;

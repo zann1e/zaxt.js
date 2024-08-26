@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Home from '../old-pages/index';
+import Logo from '../components/logo';
 
 describe('Home', () => {
   it('renders a heading', () => {
-    render(<Home />);
+    render(<Logo />);
 
-    const heading = screen.getByRole('heading', { level: 1 });
+    const image = screen.getByRole('img');
 
-    expect(heading).toBeInTheDocument();
+    expect(image).toBeInTheDocument();
   });
 });
