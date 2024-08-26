@@ -38,6 +38,7 @@ const Layout: ({
     { href: '/users', label: 'Users' },
     ...(isLoggedIn
       ? [
+          { href: '/post/create', label: 'Create Post' },
           { href: '/user/profile', label: 'Profile' },
           { href: '/user/logout', label: 'Logout' },
         ]
